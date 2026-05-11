@@ -1,4 +1,5 @@
 import { applyTurn, createInitialGameState, getAvailableDecisions, previewPace } from '../engine';
+import type { GameState } from '../types';
 
 describe('game engine', () => {
   it('advances one startup week per turn', () => {
@@ -95,7 +96,7 @@ describe('game engine', () => {
     expect(signed.exit.type).toBe('acquisition');
     expect(signed.exit.finalScore).toBeNull();
 
-    const absorbed = Array.from({ length: 4 }).reduce(
+    const absorbed = Array.from({ length: 4 }).reduce<GameState>(
       (company) => applyTurn(company, 'integrateRoadmap', 0).state,
       signed,
     );
