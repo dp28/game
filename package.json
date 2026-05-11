@@ -1,0 +1,38 @@
+{
+  "name": "sovereign-year",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --runInBand",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "validate": "npm run lint && npm run typecheck && npm run test && npm run format"
+  },
+  "dependencies": {
+    "expo": "~54.0.33",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-native": "0.81.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@types/jest": "latest",
+    "@types/react": "~19.1.0",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "globals": "latest",
+    "jest": "latest",
+    "prettier": "latest",
+    "ts-jest": "latest",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "latest"
+  }
+}
