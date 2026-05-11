@@ -34,5 +34,8 @@
     "ts-jest": "latest",
     "typescript": "~5.9.2",
     "typescript-eslint": "latest"
+  },
+  "overrides": {
+    "postcss": "^8.5.14"
   }
 }
