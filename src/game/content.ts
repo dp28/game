@@ -58,7 +58,9 @@ export const weeklyDecisions: Decision[] = [
       'Rewrite the promise, add social proof, and pretend the hero section was strategy.',
     lesson:
       'Clear positioning improves conversion because buyers need to recognize their problem before they admire your roadmap.',
+    availableIn: ['founding', 'validation', 'growth'],
     effects: { cash: -1, users: 2, morale: 1 },
+    boardEffect: 0,
     stakeholderEffects: { customers: 1, sales: 2, engineers: -1 },
     areaEffects: {
       growth: { traction: 1, polish: 1 },
@@ -72,7 +74,9 @@ export const weeklyDecisions: Decision[] = [
       'Spend the sprint on tiny annoyances users keep mentioning in suspiciously polite emails.',
     lesson:
       'Retention often improves through accumulated usability fixes, not one heroic feature with a launch video.',
+    availableIn: ['founding', 'validation', 'growth', 'scale'],
     effects: { cash: -1, users: 1, morale: 1, insight: 1 },
+    boardEffect: 1,
     stakeholderEffects: { customers: 2, engineers: 1, investors: -1 },
     areaEffects: {
       product: { polish: 2, chaos: -1 },
@@ -87,7 +91,9 @@ export const weeklyDecisions: Decision[] = [
       'Move one checkbox, rename a tier, and brace for the spreadsheet to develop opinions.',
     lesson:
       'Pricing tests reveal willingness to pay, but only if you watch activation, churn risk, and support load too.',
+    availableIn: ['validation', 'growth', 'scale'],
     effects: { cash: 2, users: -1, insight: 2 },
+    boardEffect: 1,
     stakeholderEffects: { investors: 2, customers: -1, sales: 1 },
     areaEffects: {
       growth: { traction: 1, chaos: 1 },
@@ -102,7 +108,9 @@ export const weeklyDecisions: Decision[] = [
       'Align the team, explain the bet, and use only one graph shaped like a hockey stick.',
     lesson:
       'Teams move faster when tradeoffs are explicit; morale slogans cannot replace a clear operating cadence.',
+    availableIn: ['founding', 'validation', 'growth', 'scale', 'postExit'],
     effects: { morale: 2, cash: -1, insight: 1 },
+    boardEffect: 1,
     stakeholderEffects: { engineers: 2, sales: 1, investors: 1 },
     areaEffects: {
       product: { chaos: -1 },
@@ -110,5 +118,104 @@ export const weeklyDecisions: Decision[] = [
       ops: { polish: 1, chaos: -1 },
     },
     research: 'analytics',
+  },
+  {
+    id: 'hireFirstTeam',
+    title: 'Hire the First Real Team',
+    description:
+      'Replace heroic founder duct tape with people who ask reasonable questions about payroll.',
+    lesson:
+      'Hiring increases capacity, but every person also adds coordination costs and a fresh opinion about Slack channels.',
+    availableIn: ['validation', 'growth'],
+    effects: { cash: -3, users: 2, morale: 1, insight: 1 },
+    boardEffect: -1,
+    stakeholderEffects: { engineers: 2, investors: -1, customers: 1 },
+    areaEffects: {
+      product: { polish: 1, chaos: -1 },
+      ops: { traction: 1, chaos: 1 },
+    },
+  },
+  {
+    id: 'enterprisePilot',
+    title: 'Chase the Enterprise Pilot',
+    description:
+      'Promise procurement a custom export, three security acronyms, and absolutely no chaos later.',
+    lesson:
+      'Enterprise deals can extend runway, but bespoke commitments pull the product away from simple repeatability.',
+    availableIn: ['growth', 'scale'],
+    effects: { cash: 4, users: 3, morale: -1, insight: 1 },
+    boardEffect: 1,
+    stakeholderEffects: { investors: 2, sales: 2, engineers: -2, customers: -1 },
+    areaEffects: {
+      growth: { traction: 2 },
+      product: { chaos: 2 },
+      ops: { chaos: 1 },
+    },
+    research: 'billing',
+  },
+  {
+    id: 'acceptAcquisitionOffer',
+    title: 'Accept the Acquisition Offer',
+    description:
+      'Trade independence for a logo on a slide titled Strategic Synergy, probably in 38-point font.',
+    lesson:
+      'An acquisition is not over at signing; integration risk can still destroy the value everyone celebrated.',
+    availableIn: ['exit'],
+    effects: { cash: 8, morale: -1, insight: 1 },
+    boardEffect: 2,
+    stakeholderEffects: { investors: 3, sales: 1, engineers: -1 },
+    areaEffects: {
+      ops: { chaos: 2 },
+    },
+    exitAction: 'acceptAcquisition',
+  },
+  {
+    id: 'fileForIpo',
+    title: 'File for IPO',
+    description:
+      'Turn the company into a public-market story and learn how many people can say EBITDA with confidence.',
+    lesson:
+      'An IPO starts a new accountability loop: markets reward growth, punish surprises, and read footnotes for sport.',
+    availableIn: ['exit'],
+    effects: { cash: 10, users: 4, morale: -1, insight: 2 },
+    boardEffect: 1,
+    stakeholderEffects: { investors: 2, sales: 2, engineers: -1 },
+    areaEffects: {
+      growth: { traction: 2, chaos: 1 },
+      ops: { polish: 1, chaos: 2 },
+    },
+    exitAction: 'fileForIpo',
+  },
+  {
+    id: 'integrateRoadmap',
+    title: 'Integrate Without Becoming a Wiki Page',
+    description:
+      'Merge roadmaps, retain the useful rituals, and hide the worst duplicated meetings behind a feature flag.',
+    lesson:
+      'Post-acquisition outcomes depend on integration quality, team retention, and whether customers still recognize the product.',
+    availableIn: ['postExit'],
+    effects: { cash: 1, users: 1, morale: 1, insight: 1 },
+    boardEffect: 1,
+    stakeholderEffects: { customers: 1, engineers: 1, investors: 1 },
+    areaEffects: {
+      product: { polish: 1, chaos: -1 },
+      ops: { polish: 1, chaos: -1 },
+    },
+  },
+  {
+    id: 'reassurePublicMarkets',
+    title: 'Reassure Public Markets',
+    description:
+      'Explain the quarter, mention durable growth, and avoid saying the quiet part about churn.',
+    lesson:
+      'After an IPO, operating discipline and credible guidance matter because narrative debt compounds quickly.',
+    availableIn: ['postExit'],
+    effects: { cash: 2, users: 1, morale: -1, insight: 1 },
+    boardEffect: 1,
+    stakeholderEffects: { investors: 2, sales: 1, engineers: -1 },
+    areaEffects: {
+      growth: { traction: 1 },
+      ops: { polish: 1, chaos: 1 },
+    },
   },
 ];

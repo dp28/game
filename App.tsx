@@ -10,7 +10,13 @@ import {
   View,
 } from 'react-native';
 
-import { applyTurn, createInitialGameState, getDecision, previewPace } from './src/game/engine';
+import {
+  applyTurn,
+  createInitialGameState,
+  getAvailableDecisions,
+  getDecision,
+  previewPace,
+} from './src/game/engine';
 import type { CompanyArea, DecisionId, GameState, ResourceKey } from './src/game/types';
 
 const resourceLabels: Record<ResourceKey, string> = {
@@ -24,11 +30,21 @@ export default function App() {
   const [state, setState] = useState<GameState>(() => createInitialGameState());
   const [selectedDecisionId, setSelectedDecisionId] = useState<DecisionId>('shipLandingPage');
   const { width } = useWindowDimensions();
-  const selectedDecision = getDecision(state, selectedDecisionId);
+  const availableDecisions = useMemo(() => getAvailableDecisions(state), [state]);
+  const effectiveDecisionId = availableDecisions.some(
+    (decision) => decision.id === selectedDecisionId,
+  )
+    ? selectedDecisionId
+    : availableDecisions[0]?.id;
+  const selectedDecision = effectiveDecisionId ? getDecision(state, effectiveDecisionId) : null;
   const pace = useMemo(() => previewPace(state), [state]);
 
   function advanceWeek() {
-    const result = applyTurn(state, selectedDecisionId);
+    if (!effectiveDecisionId) {
+      return;
+    }
+
+    const result = applyTurn(state, effectiveDecisionId);
     setState(result.state);
   }
 
@@ -43,6 +59,10 @@ export default function App() {
             One turn is one week. Waiting restores focus; rushing several sprints lowers decision
             quality without blocking play.
           </Text>
+          <View style={styles.paceRow}>
+            <Text style={styles.paceText}>Phase: {formatPhase(state.phase)}</Text>
+            <Text style={styles.paceText}>Board confidence: {state.boardConfidence}/10</Text>
+          </View>
         </View>
 
         <View style={styles.card}>
@@ -58,7 +78,16 @@ export default function App() {
           <View style={styles.paceRow}>
             <Text style={styles.paceText}>Focus: {pace.deliberation}/6</Text>
             <Text style={styles.paceText}>Pace quality: x{pace.multiplier}</Text>
+            <Text style={styles.paceText}>
+              Score: {state.exit.finalScore === null ? 'pending' : state.exit.finalScore}
+            </Text>
           </View>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>Exit Watch</Text>
+          <Text style={styles.bodyText}>Route: {formatPhase(state.exit.type)}</Text>
+          <Text style={styles.bodyText}>{state.exit.status}</Text>
         </View>
 
         <View style={styles.card}>
@@ -72,8 +101,8 @@ export default function App() {
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Choose this week's bet</Text>
-          {state.decisions.map((decision) => {
-            const isSelected = decision.id === selectedDecisionId;
+          {availableDecisions.map((decision) => {
+            const isSelected = decision.id === effectiveDecisionId;
 
             return (
               <Pressable
@@ -89,8 +118,20 @@ export default function App() {
               </Pressable>
             );
           })}
-          <Pressable accessibilityRole="button" onPress={advanceWeek} style={styles.primaryButton}>
-            <Text style={styles.primaryButtonText}>Ship Week {state.week + 1}</Text>
+          {availableDecisions.length === 0 ? (
+            <Text style={styles.bodyText}>
+              This company story is complete. The score is no longer pending.
+            </Text>
+          ) : null}
+          <Pressable
+            accessibilityRole="button"
+            disabled={!selectedDecision}
+            onPress={advanceWeek}
+            style={[styles.primaryButton, !selectedDecision && styles.primaryButtonDisabled]}
+          >
+            <Text style={styles.primaryButtonText}>
+              {state.phase === 'postExit' ? 'Resolve Exit Week' : `Ship Week ${state.week + 1}`}
+            </Text>
           </Pressable>
         </View>
 
@@ -98,12 +139,20 @@ export default function App() {
           <Text style={styles.sectionTitle}>Last outcome</Text>
           <Text style={styles.bodyText}>{state.lastOutcome}</Text>
           <Text style={styles.factText}>{state.lastLesson}</Text>
-          <Text style={styles.smallHeading}>Selected lesson</Text>
-          <Text style={styles.bodyText}>{selectedDecision.lesson}</Text>
+          {selectedDecision ? (
+            <>
+              <Text style={styles.smallHeading}>Selected lesson</Text>
+              <Text style={styles.bodyText}>{selectedDecision.lesson}</Text>
+            </>
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
+}
+
+function formatPhase(value: string) {
+  return value.replace(/([A-Z])/g, ' $1').replace(/^./, (character) => character.toUpperCase());
 }
 
 function AreaTile({ area, index }: { area: CompanyArea; index: number }) {
@@ -275,6 +324,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     marginTop: 4,
     padding: 14,
+  },
+  primaryButtonDisabled: {
+    opacity: 0.45,
   },
   primaryButtonText: {
     color: '#fffaf0',

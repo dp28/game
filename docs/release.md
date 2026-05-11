@@ -88,4 +88,5 @@ Long description:
 > Balance cash, users, morale, insight, stakeholders, product areas, and upgrades in a compact SaaS
 > strategy game designed for quick sessions. Each turn is one week. Continue immediately for momentum,
 > or step away and return with stronger focus. Learn real product and startup tradeoffs through the
-> choices you make.
+> choices you make. Survive board pressure from founding through exit, then keep playing until the
+> acquisition is fully absorbed or the IPO has faced one public-market year.

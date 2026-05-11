@@ -69,7 +69,10 @@ The first playable slice includes:
 - a map-like company view with three operating areas
 - four resources
 - four stakeholder groups
-- four weekly sprint decisions
+- ten weekly sprint and exit decisions
+- lifecycle phases from founding through validation, growth, scale, exit, post-exit, and completion
+- board confidence, including CEO ousting if confidence collapses
+- acquisition and IPO routes where scoring waits for absorption/cancellation or one public-market year
 - a focus mechanic that rewards time away from the phone
 - diminishing rewards when taking many sprint turns in a row
 - practical SaaS/product lessons hidden inside decisions and outcomes

@@ -7,6 +7,10 @@ company. Each turn is one week. The player chooses one company-building bet, wat
 change, and can either continue immediately at reduced decision quality or come back later with more
 focus.
 
+The full arc runs from founding to exit. Exit is not the end screen: after an acquisition, the game
+continues until the company is fully absorbed by the buyer or the integration is cancelled. After an
+IPO, the game continues for one public-market year before the stock-price score is locked.
+
 The setting is slightly tongue-in-cheek: founder dashboards, tiny growth wins, nervous investors,
 support queues, pricing experiments, morale rituals, and the occasional spreadsheet that develops
 opinions. Mechanics and lessons can teach real SaaS concepts such as activation, retention, pricing,
@@ -17,6 +21,8 @@ support load, product quality, and runway.
 - **Turn-based strategy:** one strategic bet per weekly sprint.
 - **Technology advancement:** insight unlocks SaaS upgrades.
 - **Politics:** stakeholders react differently to decisions.
+- **CEO risk:** the board can oust the player if confidence collapses.
+- **Exit arc:** acquisition and IPO paths have post-exit consequences before scoring.
 - **Short sessions:** a turn can be completed in roughly 30-90 seconds.
 - **No servers:** all state transitions are local and deterministic.
 - **Minimal assets:** the game can work with dashboards, cards, simple diagrams, and generated icons.
@@ -28,8 +34,10 @@ support load, product quality, and runway.
 1. Read the current founder dashboard.
 2. Choose one weekly bet.
 3. The engine updates resources, stakeholder moods, company-area traction/polish/chaos, and upgrades.
-4. The game shows a concise product/business lesson and outcome.
-5. The player can continue now at a lower pace-quality multiplier or stop and regain focus.
+4. The board updates confidence based on runway, morale, stakeholder mood, chaos, and traction.
+5. The company may advance to a new phase or enter/resolve an exit route.
+6. The game shows a concise product/business lesson and outcome.
+7. The player can continue now at a lower pace-quality multiplier or stop and regain focus.
 
 ## Current mechanics
 
@@ -66,6 +74,37 @@ rather than a literal office floorplan.
 - Support Bot With Boundaries
 
 Upgrades unlock when a decision contributes to a field and insight reaches the upgrade cost.
+
+### Company phases
+
+- **Founding:** prove there is a product worth discussing in a meeting.
+- **Validation:** turn early interest into repeatable learning.
+- **Growth:** hire, price, sell, and discover that every graph has a downside.
+- **Scale:** make the company operationally boring enough to become valuable.
+- **Exit:** choose an acquisition or IPO route once the company is ready.
+- **Post-exit:** keep playing until acquisition absorption/cancellation or one public-market year.
+- **Complete:** score is finally available.
+- **Ousted:** the board removes the CEO; this is a terminal failure state.
+
+### Board confidence
+
+The player is the CEO. Board confidence starts healthy but changes every turn. It can rise through
+credible traction, solid morale, low chaos, and stakeholder trust. It can fall through poor runway,
+low morale, angry stakeholders, runaway chaos, and questionable strategic bets.
+
+If board confidence reaches zero, the CEO is ousted and the company story ends as a cancelled exit.
+
+### Exit and scoring
+
+Scores are intentionally delayed:
+
+- **Acquisition:** accepting an offer starts an integration period. Score is withheld until the
+  company is fully absorbed. If confidence or morale collapses during integration, the deal can be
+  cancelled and the final score is much lower.
+- **IPO:** filing starts a one-year public-market test. Score is withheld until 52 weekly turns after
+  IPO, representing the stock price after one year of operating in public.
+
+This keeps late-stage choices meaningful and avoids treating exit as a simple victory button.
 
 ### Focus and pace quality
 

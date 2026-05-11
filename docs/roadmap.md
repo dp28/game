@@ -9,6 +9,8 @@ Status: started.
 
 - Expo React Native TypeScript app
 - Pure game engine in `src/game`
+- Lifecycle model with founding, validation, growth, scale, exit, post-exit, complete, and ousted phases
+- Board confidence, CEO ousting, acquisition integration, IPO market-test, and delayed scoring hooks
 - Linting, type-checking, formatting, tests, and CI
 - Initial docs for design, roadmap, tools, and release
 
@@ -20,6 +22,7 @@ Goal: make the current prototype pleasant to play for 2-5 minutes.
 - Add a reset-new-company flow.
 - Add clearer turn summary cards.
 - Add resource delta previews before committing a decision.
+- Show why board confidence changed after each turn.
 - Keep undo disabled.
 
 ## Slice 2: Better phone-away experiments
@@ -51,8 +54,20 @@ Goal: make company politics matter.
 - Let stakeholder mood modify resource outcomes.
 - Add board-meeting turns where customers, team, sales, and investors must be balanced.
 - Make high-influence angry stakeholders trigger events.
+- Add explicit board-meeting event turns that can warn the player before ousting.
 
-## Slice 5: Company map and product expansion
+## Slice 5: Company phases and exit routes
+
+Goal: make the full arc from founding to exit feel intentional.
+
+- Add phase-specific decision pools beyond the current starter set.
+- Add explicit acquisition and IPO preparation milestones.
+- Add acquisition integration events: retention packages, roadmap merge, brand sunset, support handoff.
+- Add IPO-year events: quarterly guidance, analyst calls, lockup expiry, activist investor noise.
+- Add cancelled-deal outcomes that are funny but mechanically clear.
+- Tune final scoring so acquisition and IPO routes feel different but comparable.
+
+## Slice 6: Company map and product expansion
 
 Goal: make the company/product map more strategic without requiring expensive art.
 
@@ -62,7 +77,7 @@ Goal: make the company/product map more strategic without requiring expensive ar
 - Show simple adjacency using SVG or React Native views.
 - Add map filters for traction, polish, chaos, and support load.
 
-## Slice 6: Upgrade tree
+## Slice 7: Upgrade tree
 
 Goal: turn insight into long-term strategy.
 
@@ -72,7 +87,7 @@ Goal: turn insight into long-term strategy.
 - Make upgrades modify future decision effects.
 - Add a final-stage goal tied to runway, retention, and morale.
 
-## Slice 7: Balancing and replayability
+## Slice 8: Balancing and replayability
 
 Goal: make the game interesting across repeated short sessions.
 
@@ -82,7 +97,7 @@ Goal: make the game interesting across repeated short sessions.
 - Add difficulty presets.
 - Add end states such as profitable niche, acquisition bait, lifestyle business, or "pivot into a newsletter."
 
-## Slice 8: Release readiness
+## Slice 9: Release readiness
 
 Goal: prepare for store submission once developer accounts exist.
 

@@ -8,7 +8,31 @@ export type AreaId = 'product' | 'growth' | 'ops';
 
 export type UpgradeId = 'analytics' | 'billing' | 'automation';
 
-export type DecisionId = 'shipLandingPage' | 'fixPapercuts' | 'runPricingTest' | 'hostAllHands';
+export type CompanyPhase =
+  | 'founding'
+  | 'validation'
+  | 'growth'
+  | 'scale'
+  | 'exit'
+  | 'postExit'
+  | 'complete'
+  | 'ousted';
+
+export type ExitType = 'none' | 'acquisition' | 'ipo' | 'cancelled';
+
+export type ExitAction = 'acceptAcquisition' | 'fileForIpo';
+
+export type DecisionId =
+  | 'shipLandingPage'
+  | 'fixPapercuts'
+  | 'runPricingTest'
+  | 'hostAllHands'
+  | 'hireFirstTeam'
+  | 'enterprisePilot'
+  | 'acceptAcquisitionOffer'
+  | 'fileForIpo'
+  | 'integrateRoadmap'
+  | 'reassurePublicMarkets';
 
 export interface Stakeholder {
   id: StakeholderId;
@@ -39,16 +63,30 @@ export interface Decision {
   title: string;
   description: string;
   lesson: string;
+  availableIn: CompanyPhase[];
   effects: Partial<Resources>;
+  boardEffect?: number;
   stakeholderEffects?: Partial<Record<StakeholderId, number>>;
   areaEffects?: Partial<
     Record<AreaId, Partial<Pick<CompanyArea, 'traction' | 'polish' | 'chaos'>>>
   >;
   research?: UpgradeId;
+  exitAction?: ExitAction;
+}
+
+export interface ExitState {
+  type: ExitType;
+  weeksRemaining: number;
+  value: number;
+  finalScore: number | null;
+  status: string;
 }
 
 export interface GameState {
   week: number;
+  phase: CompanyPhase;
+  boardConfidence: number;
+  exit: ExitState;
   resources: Resources;
   stakeholders: Stakeholder[];
   areas: CompanyArea[];
