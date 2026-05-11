@@ -12,12 +12,12 @@ Status: started.
 - Linting, type-checking, formatting, tests, and CI
 - Initial docs for design, roadmap, tools, and release
 
-## Slice 1: Playable yearly loop
+## Slice 1: Playable weekly sprint loop
 
 Goal: make the current prototype pleasant to play for 2-5 minutes.
 
 - Add local save/load for game state.
-- Add a reset-new-realm flow.
+- Add a reset-new-company flow.
 - Add clearer turn summary cards.
 - Add resource delta previews before committing a decision.
 - Keep undo disabled.
@@ -26,61 +26,61 @@ Goal: make the current prototype pleasant to play for 2-5 minutes.
 
 Goal: test multiple incentives for not touching the phone.
 
-- Deliberation: already implemented as the first experiment.
-- Add "council fatigue" that affects faction trust after many rapid turns.
-- Add daily "chronicle quality" that scores fewer, better-considered sessions.
+- Focus: already implemented as the first experiment.
+- Add "founder fog" that affects stakeholder trust after many rapid turns.
+- Add daily "strategy memo quality" that scores fewer, better-considered sessions.
 - Add settings to tune timer length for testing.
 - Track simple local analytics counters without sending data anywhere.
 
-## Slice 3: Historical content pack
+## Slice 3: SaaS content pack
 
 Goal: make learning feel embedded in play.
 
 - Expand decisions from 4 to 20.
-- Add facts for charters, estates, printing, surveying, taxation, roads, guilds, coinage, and law.
-- Add event cards with historically inspired dilemmas.
-- Add a lightweight in-game chronicle of discovered concepts.
-- Keep the setting fictional but annotate real influences in content files.
+- Add lessons for activation, retention, pricing, support, churn, onboarding, positioning, and runway.
+- Add event cards with startup-flavored dilemmas.
+- Add a lightweight in-game notebook of discovered concepts.
+- Keep the company fictional but annotate real SaaS principles in content files.
 
-## Slice 4: Factions and negotiation
+## Slice 4: Stakeholders and negotiation
 
-Goal: make politics matter.
+Goal: make company politics matter.
 
-- Give each faction an agenda.
-- Add faction requests and concessions.
-- Let faction mood modify resource outcomes.
-- Add "estate assembly" turns where multiple factions must be balanced.
-- Make high-influence angry factions trigger events.
+- Give each stakeholder group an agenda.
+- Add stakeholder requests and concessions.
+- Let stakeholder mood modify resource outcomes.
+- Add board-meeting turns where customers, team, sales, and investors must be balanced.
+- Make high-influence angry stakeholders trigger events.
 
-## Slice 5: Map and expansion
+## Slice 5: Company map and product expansion
 
-Goal: make the map more strategic without requiring expensive art.
+Goal: make the company/product map more strategic without requiring expensive art.
 
-- Add 6-9 provinces.
-- Add province traits such as port, monastery, forest, border, or university town.
-- Allow expansion through diplomacy, road building, or charters.
+- Add 6-9 company areas or product surfaces.
+- Add area traits such as enterprise, self-serve, onboarding, integrations, support, or analytics.
+- Allow expansion into new SaaS motions such as PLG, sales-led, or marketplace add-ons.
 - Show simple adjacency using SVG or React Native views.
-- Add map filters for unrest, control, and development.
+- Add map filters for traction, polish, chaos, and support load.
 
-## Slice 6: Technology tree
+## Slice 6: Upgrade tree
 
-Goal: turn knowledge into long-term strategy.
+Goal: turn insight into long-term strategy.
 
-- Replace the simple unlock list with a small tech tree.
-- Add technology prerequisites.
-- Add different research tracks: administration, commerce, military, culture.
-- Make technologies modify future decision effects.
-- Add a final-era goal tied to state capacity and legitimacy.
+- Replace the simple unlock list with a small upgrade tree.
+- Add upgrade prerequisites.
+- Add different research tracks: product, growth, revenue, operations.
+- Make upgrades modify future decision effects.
+- Add a final-stage goal tied to runway, retention, and morale.
 
 ## Slice 7: Balancing and replayability
 
 Goal: make the game interesting across repeated short sessions.
 
-- Add scoring based on stability, prosperity, knowledge, and restraint.
+- Add scoring based on runway, retention, user trust, morale, and restraint.
 - Add medium-random events.
 - Add seedable starts for deterministic testing.
 - Add difficulty presets.
-- Add end states around 1500, 1550, or 1600.
+- Add end states such as profitable niche, acquisition bait, lifestyle business, or "pivot into a newsletter."
 
 ## Slice 8: Release readiness
 

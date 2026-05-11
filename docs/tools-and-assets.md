@@ -8,7 +8,7 @@ Reasons:
 
 - It matches web-development skills better than Unity, Unreal, or native iOS/Android.
 - It supports iOS, Android, and optional web preview from one codebase.
-- It works well for a card/map/text-heavy strategy game.
+- It works well for a card/dashboard/map/text-heavy strategy game.
 - It avoids server requirements.
 - It keeps AI-generated code reviewable because most logic can live in pure TypeScript modules.
 
@@ -36,37 +36,40 @@ budget and existing skills.
 
 ## Free AI-assisted asset options
 
-The current prototype does not need high-end art. Prefer a restrained board-game style:
+The current prototype does not need high-end art. Prefer a clean, lightly satirical SaaS dashboard
+style:
 
-- parchment cards
-- simple heraldic icons
-- flat map regions
-- serif/sans typography
-- limited color palette
+- rounded dashboard cards
+- simple product and stakeholder icons
+- flat company/product map regions
+- crisp sans typography
+- limited startup-y color palette with one absurd accent color
 
 Useful free or free-tier tools:
 
-- **Bing Image Creator / Microsoft Designer:** app icon concepts, card art, heraldic symbols.
-- **Leonardo AI free tier:** stylized map and icon concepts.
+- **Bing Image Creator / Microsoft Designer:** app icon concepts, card art, mascot ideas.
+- **Leonardo AI free tier:** stylized dashboard and icon concepts.
 - **Stable Diffusion via free local tools:** full control if you have a capable machine.
 - **Inkscape:** clean up generated SVG-style icons.
 - **Figma free tier:** compose screenshots, store graphics, and simple UI mockups.
 - **Game-icons.net:** free SVG icons under CC BY 3.0; attribution required.
 - **OpenGameArt.org:** public/free game assets; check each asset license carefully.
-- **Wikimedia Commons:** historical public-domain art; check jurisdiction and license.
+- **unDraw:** free SVG illustrations; check current license terms before using in-store assets.
 
 Suggested prompt for icons:
 
 ```text
-Minimal flat vector icon for a mobile historical strategy game, late medieval Renaissance state
-formation, parchment and dark green palette, simple heraldic mark, readable at app icon size, no text
+Minimal flat vector icon for a mobile startup strategy game about growing a SaaS company, ramen bowl
+and upward chart motif, playful but clean, teal and warm yellow palette, readable at app icon size, no
+text
 ```
 
 Suggested prompt for map texture:
 
 ```text
-Simple board game map of a fictional Renaissance border realm, three provinces, parchment texture,
-muted greens and browns, clean mobile UI style, no labels, no text
+Simple mobile game dashboard map of a tiny SaaS company, three connected areas named product growth
+ops implied visually but no text, rounded cards, clean vector style, teal warm yellow and off-white
+palette, no labels
 ```
 
 ## Asset rules for this project

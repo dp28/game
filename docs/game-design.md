@@ -1,77 +1,78 @@
-# Game design: Sovereign Year
+# Game design: Runway Ramen
 
 ## Working pitch
 
-Sovereign Year is a short-burst, single-player strategy game about state formation in a fictional
-late-medieval / Renaissance realm. Each turn is one year. The player chooses one policy, sees the
-realm change, and can either continue immediately at reduced decision quality or come back later with
-more deliberation.
+Runway Ramen is a short-burst, single-player strategy game about starting and growing a tiny SaaS
+company. Each turn is one week. The player chooses one company-building bet, watches the company
+change, and can either continue immediately at reduced decision quality or come back later with more
+focus.
 
-The fictional setting keeps content flexible, while mechanics and notes can teach real historical
-patterns: charters, estates, printing, surveys, taxation, faction bargains, and centralization.
+The setting is slightly tongue-in-cheek: founder dashboards, tiny growth wins, nervous investors,
+support queues, pricing experiments, morale rituals, and the occasional spreadsheet that develops
+opinions. Mechanics and lessons can teach real SaaS concepts such as activation, retention, pricing,
+support load, product quality, and runway.
 
 ## Why this concept fits the interview
 
-- **Historical interest:** medieval, Renaissance, and early modern state formation.
-- **Turn-based strategy:** one policy per yearly tick.
-- **Technology advancement:** knowledge unlocks historical technologies.
-- **Politics:** factions react differently to policies.
+- **Turn-based strategy:** one strategic bet per weekly sprint.
+- **Technology advancement:** insight unlocks SaaS upgrades.
+- **Politics:** stakeholders react differently to decisions.
 - **Short sessions:** a turn can be completed in roughly 30-90 seconds.
 - **No servers:** all state transitions are local and deterministic.
-- **Minimal assets:** the game can work with maps, cards, typography, and generated icons.
-- **Learning:** historical facts appear as consequences rather than quizzes.
-- **Phone-away incentive:** deliberation accumulates while away and improves outcomes.
+- **Minimal assets:** the game can work with dashboards, cards, simple diagrams, and generated icons.
+- **Learning:** SaaS/product lessons appear as consequences rather than quizzes.
+- **Phone-away incentive:** focus accumulates while away and improves outcomes.
 
 ## Core loop
 
-1. Read the current realm status.
-2. Choose one yearly policy.
-3. The engine updates resources, faction moods, province control/development/unrest, and research.
-4. The game shows a concise historical note and outcome.
-5. The player can continue now at a lower pace-quality multiplier or stop and regain deliberation.
+1. Read the current founder dashboard.
+2. Choose one weekly bet.
+3. The engine updates resources, stakeholder moods, company-area traction/polish/chaos, and upgrades.
+4. The game shows a concise product/business lesson and outcome.
+5. The player can continue now at a lower pace-quality multiplier or stop and regain focus.
 
 ## Current mechanics
 
 ### Resources
 
-- **Grain:** food stability and immediate welfare.
-- **Coin:** state capacity, spending power, and trade.
-- **Legitimacy:** acceptance of rule by factions and provinces.
-- **Knowledge:** administrative, technical, and scholarly progress.
+- **Cash:** runway and ability to buy time.
+- **Users:** active users or early customers.
+- **Morale:** team energy and willingness to survive another roadmap discussion.
+- **Insight:** product learning that unlocks better systems.
 
-### Factions
+### Stakeholders
 
-- Merchant Guilds
-- Landed Nobles
-- Cathedral Chapter
-- Town Commons
+- Customers
+- Engineers
+- Investors
+- Sales Team
 
-Factions currently track influence and mood. Mood changes are implemented; influence exists for
-future event weighting and bargaining mechanics.
+Stakeholders currently track influence and mood. Mood changes are implemented; influence exists for
+future event weighting, negotiation, and "who is currently blocking the roadmap" mechanics.
 
-### Provinces
+### Company areas
 
-- The Seat
-- Riverlands
-- Hill March
+- Product
+- Growth
+- Ops
 
-Provinces track control, development, and unrest. The current UI renders them as a map-like board
-rather than a full tile map.
+Company areas track traction, polish, and chaos. The current UI renders them as a map-like board
+rather than a literal office floorplan.
 
-### Technologies
+### Upgrades
 
-- Town Charters
-- Printing Networks
-- Cadastral Surveys
+- Actually Useful Analytics
+- Billing That Mostly Works
+- Support Bot With Boundaries
 
-Technologies unlock when a decision contributes to a field and knowledge reaches the technology cost.
+Upgrades unlock when a decision contributes to a field and insight reaches the upgrade cost.
 
-### Deliberation and pace quality
+### Focus and pace quality
 
-Deliberation is the first phone-away experiment:
+Focus is the first phone-away experiment:
 
-- Deliberation accumulates over time while the player is away.
-- High deliberation increases the pace-quality multiplier.
+- Focus accumulates over time while the player is away.
+- High focus increases the pace-quality multiplier.
 - Consecutive turns reduce the multiplier.
 - There is no hard timer and no punishment for stopping.
 
@@ -80,16 +81,17 @@ speed and quality decision-making.
 
 ## Tone
 
-Approachable historical strategy:
+Approachable startup satire:
 
-- serious enough to teach real concepts
+- grounded enough to teach real SaaS concepts
+- silly enough to make failure feel funny instead of punishing
 - light enough for quick mobile sessions
-- fictional enough to avoid needing a huge factual database at the start
+- fictional enough to avoid requiring real startup data or legal/financial advice
 
 ## Design principles
 
 1. One turn should fit in a short queue or bus-stop moment.
 2. Every mechanic should be legible from the UI.
-3. Historical learning should mostly happen through cause and effect.
+3. Business/product learning should mostly happen through cause and effect.
 4. Systems should be simple enough for AI-assisted iteration.
 5. The game should remain fully playable offline.

@@ -1,40 +1,36 @@
-export type ResourceKey = 'grain' | 'coin' | 'legitimacy' | 'knowledge';
+export type ResourceKey = 'cash' | 'users' | 'morale' | 'insight';
 
 export type Resources = Record<ResourceKey, number>;
 
-export type FactionId = 'guilds' | 'nobles' | 'clergy' | 'commons';
+export type StakeholderId = 'customers' | 'engineers' | 'investors' | 'sales';
 
-export type ProvinceId = 'capital' | 'riverlands' | 'hillmarch';
+export type AreaId = 'product' | 'growth' | 'ops';
 
-export type TechId = 'charters' | 'printing' | 'surveying';
+export type UpgradeId = 'analytics' | 'billing' | 'automation';
 
-export type DecisionId =
-  | 'sponsorGuildRoads'
-  | 'codifyLandRights'
-  | 'inviteScholars'
-  | 'mediateFactionDispute';
+export type DecisionId = 'shipLandingPage' | 'fixPapercuts' | 'runPricingTest' | 'hostAllHands';
 
-export interface Faction {
-  id: FactionId;
+export interface Stakeholder {
+  id: StakeholderId;
   name: string;
   influence: number;
   mood: number;
 }
 
-export interface Province {
-  id: ProvinceId;
+export interface CompanyArea {
+  id: AreaId;
   name: string;
-  control: number;
-  development: number;
-  unrest: number;
+  traction: number;
+  polish: number;
+  chaos: number;
 }
 
-export interface Technology {
-  id: TechId;
+export interface Upgrade {
+  id: UpgradeId;
   name: string;
-  era: 'medieval' | 'renaissance' | 'early-modern';
+  stage: 'idea' | 'early-saas' | 'scaling';
   cost: number;
-  fact: string;
+  lesson: string;
   unlocked: boolean;
 }
 
@@ -42,26 +38,26 @@ export interface Decision {
   id: DecisionId;
   title: string;
   description: string;
-  historicalNote: string;
+  lesson: string;
   effects: Partial<Resources>;
-  factionEffects?: Partial<Record<FactionId, number>>;
-  provinceEffects?: Partial<
-    Record<ProvinceId, Partial<Pick<Province, 'control' | 'development' | 'unrest'>>>
+  stakeholderEffects?: Partial<Record<StakeholderId, number>>;
+  areaEffects?: Partial<
+    Record<AreaId, Partial<Pick<CompanyArea, 'traction' | 'polish' | 'chaos'>>>
   >;
-  research?: TechId;
+  research?: UpgradeId;
 }
 
 export interface GameState {
-  year: number;
+  week: number;
   resources: Resources;
-  factions: Faction[];
-  provinces: Province[];
-  technologies: Technology[];
+  stakeholders: Stakeholder[];
+  areas: CompanyArea[];
+  upgrades: Upgrade[];
   decisions: Decision[];
   consecutiveTurns: number;
   deliberation: number;
   lastTurnEndedAt: number;
-  lastFact: string;
+  lastLesson: string;
   lastOutcome: string;
 }
 

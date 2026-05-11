@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Sovereign Year",
-    "slug": "sovereign-year",
+    "name": "Runway Ramen",
+    "slug": "runway-ramen",
     "version": "0.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.example.sovereignyear"
+      "bundleIdentifier": "com.example.runwayramen"
     },
     "android": {
-      "package": "com.example.sovereignyear",
+      "package": "com.example.runwayramen",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },

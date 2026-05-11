@@ -1,41 +1,42 @@
 import {
-  startingFactions,
-  startingProvinces,
+  startingAreas,
   startingResources,
-  startingTechnologies,
-  yearlyDecisions,
+  startingStakeholders,
+  startingUpgrades,
+  weeklyDecisions,
 } from './content';
 import type {
+  CompanyArea,
   Decision,
   DecisionId,
-  Faction,
   GameState,
-  Province,
   ResourceKey,
   Resources,
-  Technology,
+  Stakeholder,
   TurnResult,
+  Upgrade,
 } from './types';
 
 const MAX_DELIBERATION = 6;
 const DELIBERATION_MS = 30 * 60 * 1000;
 
-const resourceKeys: ResourceKey[] = ['grain', 'coin', 'legitimacy', 'knowledge'];
+const resourceKeys: ResourceKey[] = ['cash', 'users', 'morale', 'insight'];
 
 export function createInitialGameState(now = Date.now()): GameState {
   return {
-    year: 1453,
+    week: 1,
     resources: { ...startingResources },
-    factions: cloneFactions(startingFactions),
-    provinces: cloneProvinces(startingProvinces),
-    technologies: cloneTechnologies(startingTechnologies),
-    decisions: [...yearlyDecisions],
+    stakeholders: cloneStakeholders(startingStakeholders),
+    areas: cloneAreas(startingAreas),
+    upgrades: cloneUpgrades(startingUpgrades),
+    decisions: [...weeklyDecisions],
     consecutiveTurns: 0,
     deliberation: 2,
     lastTurnEndedAt: now,
-    lastFact:
-      'The year 1453 is a useful early-modern hinge: Constantinople fell, and printing was spreading in Europe.',
-    lastOutcome: 'Your realm is small, divided, and ready to be shaped one year at a time.',
+    lastLesson:
+      'SaaS is a game of compounding tiny decisions, recurring revenue, and learning not to ship every idea your shower invents.',
+    lastOutcome:
+      'Your tiny SaaS has a landing page, a TODO list, and several feelings about product-market fit.',
   };
 }
 
@@ -74,20 +75,20 @@ export function applyTurn(state: GameState, decisionId: DecisionId, now = Date.n
   const appliedEffects = scaleEffects(decision.effects, paceMultiplier);
 
   const nextResources = clampResources(applyResourceEffects(state.resources, appliedEffects));
-  const nextTechnologies = applyResearch(state.technologies, decision, nextResources);
+  const nextUpgrades = applyResearch(state.upgrades, decision, nextResources);
 
   return {
     state: {
       ...state,
-      year: state.year + 1,
+      week: state.week + 1,
       resources: nextResources,
-      factions: applyFactionEffects(state.factions, decision),
-      provinces: applyProvinceEffects(state.provinces, decision),
-      technologies: nextTechnologies,
+      stakeholders: applyStakeholderEffects(state.stakeholders, decision),
+      areas: applyAreaEffects(state.areas, decision),
+      upgrades: nextUpgrades,
       consecutiveTurns: deliberation > state.deliberation ? 0 : state.consecutiveTurns + 1,
       deliberation: Math.max(0, deliberation - 1),
       lastTurnEndedAt: now,
-      lastFact: decision.historicalNote,
+      lastLesson: decision.lesson,
       lastOutcome: describeOutcome(decision, appliedEffects, paceMultiplier),
     },
     appliedEffects,
@@ -130,47 +131,43 @@ function applyResourceEffects(resources: Resources, effects: Resources): Resourc
   );
 }
 
-function applyFactionEffects(factions: Faction[], decision: Decision): Faction[] {
-  return factions.map((faction) => ({
-    ...faction,
-    mood: clamp(faction.mood + (decision.factionEffects?.[faction.id] ?? 0), 0, 10),
+function applyStakeholderEffects(stakeholders: Stakeholder[], decision: Decision): Stakeholder[] {
+  return stakeholders.map((stakeholder) => ({
+    ...stakeholder,
+    mood: clamp(stakeholder.mood + (decision.stakeholderEffects?.[stakeholder.id] ?? 0), 0, 10),
   }));
 }
 
-function applyProvinceEffects(provinces: Province[], decision: Decision): Province[] {
-  return provinces.map((province) => {
-    const effects = decision.provinceEffects?.[province.id];
+function applyAreaEffects(areas: CompanyArea[], decision: Decision): CompanyArea[] {
+  return areas.map((area) => {
+    const effects = decision.areaEffects?.[area.id];
 
     if (!effects) {
-      return province;
+      return area;
     }
 
     return {
-      ...province,
-      control: clamp(province.control + (effects.control ?? 0), 0, 10),
-      development: clamp(province.development + (effects.development ?? 0), 0, 10),
-      unrest: clamp(province.unrest + (effects.unrest ?? 0), 0, 10),
+      ...area,
+      traction: clamp(area.traction + (effects.traction ?? 0), 0, 10),
+      polish: clamp(area.polish + (effects.polish ?? 0), 0, 10),
+      chaos: clamp(area.chaos + (effects.chaos ?? 0), 0, 10),
     };
   });
 }
 
-function applyResearch(
-  technologies: Technology[],
-  decision: Decision,
-  resources: Resources,
-): Technology[] {
+function applyResearch(upgrades: Upgrade[], decision: Decision, resources: Resources): Upgrade[] {
   if (!decision.research) {
-    return technologies;
+    return upgrades;
   }
 
-  return technologies.map((technology) => {
-    if (technology.id !== decision.research || technology.unlocked) {
-      return technology;
+  return upgrades.map((upgrade) => {
+    if (upgrade.id !== decision.research || upgrade.unlocked) {
+      return upgrade;
     }
 
     return {
-      ...technology,
-      unlocked: resources.knowledge >= technology.cost,
+      ...upgrade,
+      unlocked: resources.insight >= upgrade.cost,
     };
   });
 }
@@ -200,23 +197,23 @@ function clampResources(resources: Resources): Resources {
 
 function emptyResources(): Resources {
   return {
-    grain: 0,
-    coin: 0,
-    legitimacy: 0,
-    knowledge: 0,
+    cash: 0,
+    users: 0,
+    morale: 0,
+    insight: 0,
   };
 }
 
-function cloneFactions(factions: Faction[]): Faction[] {
-  return factions.map((faction) => ({ ...faction }));
+function cloneStakeholders(stakeholders: Stakeholder[]): Stakeholder[] {
+  return stakeholders.map((stakeholder) => ({ ...stakeholder }));
 }
 
-function cloneProvinces(provinces: Province[]): Province[] {
-  return provinces.map((province) => ({ ...province }));
+function cloneAreas(areas: CompanyArea[]): CompanyArea[] {
+  return areas.map((area) => ({ ...area }));
 }
 
-function cloneTechnologies(technologies: Technology[]): Technology[] {
-  return technologies.map((technology) => ({ ...technology }));
+function cloneUpgrades(upgrades: Upgrade[]): Upgrade[] {
+  return upgrades.map((upgrade) => ({ ...upgrade }));
 }
 
 function clamp(value: number, minimum: number, maximum: number): number {

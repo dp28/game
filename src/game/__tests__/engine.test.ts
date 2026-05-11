@@ -1,11 +1,11 @@
 import { applyTurn, createInitialGameState, previewPace } from '../engine';
 
 describe('game engine', () => {
-  it('advances one historical year per turn', () => {
+  it('advances one startup week per turn', () => {
     const state = createInitialGameState(0);
-    const result = applyTurn(state, 'sponsorGuildRoads', 0);
+    const result = applyTurn(state, 'shipLandingPage', 0);
 
-    expect(result.state.year).toBe(1454);
+    expect(result.state.week).toBe(2);
   });
 
   it('rewards time away with a stronger pace multiplier', () => {
@@ -16,20 +16,20 @@ describe('game engine', () => {
     expect(rested.multiplier).toBeGreaterThan(rushed.multiplier);
   });
 
-  it('can unlock technology when knowledge reaches the cost', () => {
+  it('can unlock upgrades when insight reaches the cost', () => {
     const state = {
       ...createInitialGameState(0),
       resources: {
-        grain: 8,
-        coin: 6,
-        legitimacy: 7,
-        knowledge: 5,
+        cash: 8,
+        users: 3,
+        morale: 7,
+        insight: 5,
       },
     };
-    const result = applyTurn(state, 'codifyLandRights', 0);
+    const result = applyTurn(state, 'fixPapercuts', 0);
 
-    expect(
-      result.state.technologies.find((technology) => technology.id === 'surveying')?.unlocked,
-    ).toBe(true);
+    expect(result.state.upgrades.find((upgrade) => upgrade.id === 'automation')?.unlocked).toBe(
+      true,
+    );
   });
 });

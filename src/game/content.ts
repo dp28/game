@@ -1,103 +1,114 @@
-import type { Decision, Faction, Province, Resources, Technology } from './types';
+import type { CompanyArea, Decision, Resources, Stakeholder, Upgrade } from './types';
 
 export const startingResources: Resources = {
-  grain: 8,
-  coin: 6,
-  legitimacy: 7,
-  knowledge: 2,
+  cash: 8,
+  users: 3,
+  morale: 7,
+  insight: 2,
 };
 
-export const startingFactions: Faction[] = [
-  { id: 'guilds', name: 'Merchant Guilds', influence: 6, mood: 5 },
-  { id: 'nobles', name: 'Landed Nobles', influence: 7, mood: 5 },
-  { id: 'clergy', name: 'Cathedral Chapter', influence: 5, mood: 6 },
-  { id: 'commons', name: 'Town Commons', influence: 4, mood: 5 },
+export const startingStakeholders: Stakeholder[] = [
+  { id: 'customers', name: 'Customers', influence: 7, mood: 5 },
+  { id: 'engineers', name: 'Engineers', influence: 6, mood: 6 },
+  { id: 'investors', name: 'Investors', influence: 5, mood: 5 },
+  { id: 'sales', name: 'Sales Team', influence: 4, mood: 5 },
 ];
 
-export const startingProvinces: Province[] = [
-  { id: 'capital', name: 'The Seat', control: 8, development: 6, unrest: 2 },
-  { id: 'riverlands', name: 'Riverlands', control: 5, development: 4, unrest: 3 },
-  { id: 'hillmarch', name: 'Hill March', control: 3, development: 2, unrest: 4 },
+export const startingAreas: CompanyArea[] = [
+  { id: 'product', name: 'Product', traction: 4, polish: 3, chaos: 5 },
+  { id: 'growth', name: 'Growth', traction: 3, polish: 2, chaos: 4 },
+  { id: 'ops', name: 'Ops', traction: 2, polish: 4, chaos: 3 },
 ];
 
-export const startingTechnologies: Technology[] = [
+export const startingUpgrades: Upgrade[] = [
   {
-    id: 'charters',
-    name: 'Town Charters',
-    era: 'medieval',
+    id: 'analytics',
+    name: 'Actually Useful Analytics',
+    stage: 'idea',
     cost: 4,
-    fact: 'Medieval charters often traded local privileges for taxes, soldiers, or political loyalty.',
+    lesson:
+      'Good analytics answer product questions; vanity dashboards mostly make the founder feel briefly taller.',
     unlocked: false,
   },
   {
-    id: 'printing',
-    name: 'Printing Networks',
-    era: 'renaissance',
+    id: 'billing',
+    name: 'Billing That Mostly Works',
+    stage: 'early-saas',
     cost: 7,
-    fact: 'Printing helped governments standardize law, circulate decrees, and spread religious and political arguments.',
+    lesson:
+      'SaaS revenue depends on retention and reliable billing, not just a triumphant launch tweet.',
     unlocked: false,
   },
   {
-    id: 'surveying',
-    name: 'Cadastral Surveys',
-    era: 'early-modern',
+    id: 'automation',
+    name: 'Support Bot With Boundaries',
+    stage: 'scaling',
     cost: 6,
-    fact: 'Early modern rulers used land surveys to tax more consistently and make local power visible to the center.',
+    lesson:
+      'Automation helps when the process is understood; automating confusion just scales confusion.',
     unlocked: false,
   },
 ];
 
-export const yearlyDecisions: Decision[] = [
+export const weeklyDecisions: Decision[] = [
   {
-    id: 'sponsorGuildRoads',
-    title: 'Sponsor Guild Roads',
-    description: 'Fund merchants to improve roads between towns and market fairs.',
-    historicalNote:
-      'Road privileges and tolls made trade policy a political bargain, not just an engineering project.',
-    effects: { coin: -2, grain: 1, legitimacy: 1 },
-    factionEffects: { guilds: 2, nobles: -1 },
-    provinceEffects: {
-      riverlands: { development: 1, control: 1 },
-      hillmarch: { development: 1 },
+    id: 'shipLandingPage',
+    title: 'Ship a Sharper Landing Page',
+    description:
+      'Rewrite the promise, add social proof, and pretend the hero section was strategy.',
+    lesson:
+      'Clear positioning improves conversion because buyers need to recognize their problem before they admire your roadmap.',
+    effects: { cash: -1, users: 2, morale: 1 },
+    stakeholderEffects: { customers: 1, sales: 2, engineers: -1 },
+    areaEffects: {
+      growth: { traction: 1, polish: 1 },
+      product: { chaos: 1 },
     },
   },
   {
-    id: 'codifyLandRights',
-    title: 'Codify Land Rights',
-    description: 'Write customary rights into law to reduce noble disputes and improve taxation.',
-    historicalNote:
-      'As states formed, written law often turned local custom into central authority.',
-    effects: { coin: 1, legitimacy: -1, knowledge: 1 },
-    factionEffects: { nobles: -2, commons: 1 },
-    provinceEffects: {
-      capital: { control: 1 },
-      hillmarch: { unrest: -1 },
+    id: 'fixPapercuts',
+    title: 'Fix the Papercuts',
+    description:
+      'Spend the sprint on tiny annoyances users keep mentioning in suspiciously polite emails.',
+    lesson:
+      'Retention often improves through accumulated usability fixes, not one heroic feature with a launch video.',
+    effects: { cash: -1, users: 1, morale: 1, insight: 1 },
+    stakeholderEffects: { customers: 2, engineers: 1, investors: -1 },
+    areaEffects: {
+      product: { polish: 2, chaos: -1 },
+      ops: { chaos: -1 },
     },
-    research: 'surveying',
+    research: 'automation',
   },
   {
-    id: 'inviteScholars',
-    title: 'Invite Scholars',
-    description: 'Sponsor scholars, translators, and printers to expand administrative knowledge.',
-    historicalNote:
-      'Renaissance courts used scholars as diplomats, propagandists, engineers, and administrators.',
-    effects: { coin: -1, legitimacy: 1, knowledge: 2 },
-    factionEffects: { clergy: 1, guilds: 1 },
-    research: 'printing',
+    id: 'runPricingTest',
+    title: 'Run a Pricing Test',
+    description:
+      'Move one checkbox, rename a tier, and brace for the spreadsheet to develop opinions.',
+    lesson:
+      'Pricing tests reveal willingness to pay, but only if you watch activation, churn risk, and support load too.',
+    effects: { cash: 2, users: -1, insight: 2 },
+    stakeholderEffects: { investors: 2, customers: -1, sales: 1 },
+    areaEffects: {
+      growth: { traction: 1, chaos: 1 },
+      ops: { chaos: 1 },
+    },
+    research: 'billing',
   },
   {
-    id: 'mediateFactionDispute',
-    title: 'Mediate Faction Dispute',
-    description: 'Spend political capital to keep competing estates in the same room.',
-    historicalNote:
-      'Representative estates could help rulers tax and govern, but only when factions accepted the bargain.',
-    effects: { legitimacy: 1, grain: -1 },
-    factionEffects: { guilds: 1, nobles: 1, clergy: 1, commons: 1 },
-    provinceEffects: {
-      capital: { unrest: -1 },
-      riverlands: { unrest: -1 },
-      hillmarch: { unrest: -1 },
+    id: 'hostAllHands',
+    title: 'Host an All-Hands Without a Decknado',
+    description:
+      'Align the team, explain the bet, and use only one graph shaped like a hockey stick.',
+    lesson:
+      'Teams move faster when tradeoffs are explicit; morale slogans cannot replace a clear operating cadence.',
+    effects: { morale: 2, cash: -1, insight: 1 },
+    stakeholderEffects: { engineers: 2, sales: 1, investors: 1 },
+    areaEffects: {
+      product: { chaos: -1 },
+      growth: { chaos: -1 },
+      ops: { polish: 1, chaos: -1 },
     },
-    research: 'charters',
+    research: 'analytics',
   },
 ];

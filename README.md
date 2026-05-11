@@ -1,13 +1,13 @@
-# Sovereign Year
+# Runway Ramen
 
-Sovereign Year is a tiny, offline, mobile-first turn-based strategy game prototype for iOS and Android.
-You guide a late-medieval / Renaissance realm through one-year turns, balancing grain, coin,
-legitimacy, knowledge, factions, provinces, and technology.
+Runway Ramen is a tiny, offline, mobile-first turn-based strategy game prototype for iOS and Android.
+You guide a very small SaaS company through weekly sprints, balancing cash, users, morale, insight,
+stakeholders, company areas, and upgrades.
 
 The project is intentionally set up for a web developer using AI assistance:
 
 - **Stack:** Expo + React Native + TypeScript
-- **Game loop:** one short policy decision per year
+- **Game loop:** one short company-building decision per week
 - **Mobile target:** iOS and Android, with optional web preview
 - **Server cost:** none; the game is fully single-player
 - **Maintenance:** linting, formatting, type-checking, tests, and CI
@@ -53,7 +53,7 @@ This runs:
 
 ```text
 App.tsx                  Mobile prototype UI
-src/game/content.ts      Starting historical content and decisions
+src/game/content.ts      Starting SaaS company content and decisions
 src/game/engine.ts       Pure game-state transition logic
 src/game/types.ts        Game domain types
 docs/game-design.md      Current concept and mechanics
@@ -66,13 +66,13 @@ docs/release.md          Build, store, CI, and CD notes
 
 The first playable slice includes:
 
-- a map-like realm view with three provinces
+- a map-like company view with three operating areas
 - four resources
-- four political factions
-- four yearly policy decisions
-- a deliberation mechanic that rewards time away from the phone
-- diminishing rewards when taking many turns in a row
-- historical notes hidden inside decisions and outcomes
+- four stakeholder groups
+- four weekly sprint decisions
+- a focus mechanic that rewards time away from the phone
+- diminishing rewards when taking many sprint turns in a row
+- practical SaaS/product lessons hidden inside decisions and outcomes
 
 The goal is not to finish the full game immediately. It is to create a stable framework where each
 future 40-minute session can add one visible improvement.

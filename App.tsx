@@ -11,23 +11,23 @@ import {
 } from 'react-native';
 
 import { applyTurn, createInitialGameState, getDecision, previewPace } from './src/game/engine';
-import type { DecisionId, GameState, Province, ResourceKey } from './src/game/types';
+import type { CompanyArea, DecisionId, GameState, ResourceKey } from './src/game/types';
 
 const resourceLabels: Record<ResourceKey, string> = {
-  grain: 'Grain',
-  coin: 'Coin',
-  legitimacy: 'Legitimacy',
-  knowledge: 'Knowledge',
+  cash: 'Cash',
+  users: 'Users',
+  morale: 'Morale',
+  insight: 'Insight',
 };
 
 export default function App() {
   const [state, setState] = useState<GameState>(() => createInitialGameState());
-  const [selectedDecisionId, setSelectedDecisionId] = useState<DecisionId>('sponsorGuildRoads');
+  const [selectedDecisionId, setSelectedDecisionId] = useState<DecisionId>('shipLandingPage');
   const { width } = useWindowDimensions();
   const selectedDecision = getDecision(state, selectedDecisionId);
   const pace = useMemo(() => previewPace(state), [state]);
 
-  function advanceYear() {
+  function advanceWeek() {
     const result = applyTurn(state, selectedDecisionId);
     setState(result.state);
   }
@@ -37,16 +37,16 @@ export default function App() {
       <StatusBar style="dark" />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.eyebrow}>Sovereign Year</Text>
-          <Text style={styles.title}>Realm of the Marches, {state.year}</Text>
+          <Text style={styles.eyebrow}>Runway Ramen</Text>
+          <Text style={styles.title}>Tiny SaaS Co., Week {state.week}</Text>
           <Text style={styles.subtitle}>
-            One turn is one year. Waiting restores deliberation; rushing several years lowers
-            decision quality without blocking play.
+            One turn is one week. Waiting restores focus; rushing several sprints lowers decision
+            quality without blocking play.
           </Text>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Council Ledger</Text>
+          <Text style={styles.sectionTitle}>Founder Dashboard</Text>
           <View style={styles.resourceGrid}>
             {(Object.keys(resourceLabels) as ResourceKey[]).map((key) => (
               <View key={key} style={styles.resourcePill}>
@@ -56,22 +56,22 @@ export default function App() {
             ))}
           </View>
           <View style={styles.paceRow}>
-            <Text style={styles.paceText}>Deliberation: {pace.deliberation}/6</Text>
+            <Text style={styles.paceText}>Focus: {pace.deliberation}/6</Text>
             <Text style={styles.paceText}>Pace quality: x{pace.multiplier}</Text>
           </View>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Map of Influence</Text>
+          <Text style={styles.sectionTitle}>Company Map</Text>
           <View style={[styles.map, { minHeight: Math.max(180, width * 0.5) }]}>
-            {state.provinces.map((province, index) => (
-              <ProvinceTile key={province.id} province={province} index={index} />
+            {state.areas.map((area, index) => (
+              <AreaTile key={area.id} area={area} index={index} />
             ))}
           </View>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Choose this year's policy</Text>
+          <Text style={styles.sectionTitle}>Choose this week's bet</Text>
           {state.decisions.map((decision) => {
             const isSelected = decision.id === selectedDecisionId;
 
@@ -89,32 +89,32 @@ export default function App() {
               </Pressable>
             );
           })}
-          <Pressable accessibilityRole="button" onPress={advanceYear} style={styles.primaryButton}>
-            <Text style={styles.primaryButtonText}>Advance to {state.year + 1}</Text>
+          <Pressable accessibilityRole="button" onPress={advanceWeek} style={styles.primaryButton}>
+            <Text style={styles.primaryButtonText}>Ship Week {state.week + 1}</Text>
           </Pressable>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Last outcome</Text>
           <Text style={styles.bodyText}>{state.lastOutcome}</Text>
-          <Text style={styles.factText}>{state.lastFact}</Text>
-          <Text style={styles.smallHeading}>Selected historical note</Text>
-          <Text style={styles.bodyText}>{selectedDecision.historicalNote}</Text>
+          <Text style={styles.factText}>{state.lastLesson}</Text>
+          <Text style={styles.smallHeading}>Selected lesson</Text>
+          <Text style={styles.bodyText}>{selectedDecision.lesson}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-function ProvinceTile({ province, index }: { province: Province; index: number }) {
+function AreaTile({ area, index }: { area: CompanyArea; index: number }) {
   const alignments = [styles.mapTileNorth, styles.mapTileEast, styles.mapTileWest];
 
   return (
     <View style={[styles.mapTile, alignments[index] ?? styles.mapTileNorth]}>
-      <Text style={styles.mapTileName}>{province.name}</Text>
-      <Text style={styles.mapTileStat}>Control {province.control}</Text>
-      <Text style={styles.mapTileStat}>Development {province.development}</Text>
-      <Text style={styles.mapTileStat}>Unrest {province.unrest}</Text>
+      <Text style={styles.mapTileName}>{area.name}</Text>
+      <Text style={styles.mapTileStat}>Traction {area.traction}</Text>
+      <Text style={styles.mapTileStat}>Polish {area.polish}</Text>
+      <Text style={styles.mapTileStat}>Chaos {area.chaos}</Text>
     </View>
   );
 }

@@ -57,8 +57,8 @@ npm run web
 
 Replace these placeholders:
 
-- `app.json` iOS bundle identifier: `com.example.sovereignyear`
-- `app.json` Android package: `com.example.sovereignyear`
+- `app.json` iOS bundle identifier: `com.example.runwayramen`
+- `app.json` Android package: `com.example.runwayramen`
 - app icon and splash assets
 - privacy policy URL
 - support URL
@@ -81,11 +81,11 @@ forms before release.
 
 Short description:
 
-> Guide a Renaissance border realm one year at a time in a short-burst political strategy game.
+> Grow a tiny SaaS company one sprint at a time in a short-burst startup strategy game.
 
 Long description:
 
-> Balance grain, coin, legitimacy, knowledge, factions, provinces, and technology in a compact
-> historical strategy game designed for quick sessions. Each turn is one year. Continue immediately
-> for momentum, or step away and return with stronger deliberation. Learn real ideas from medieval,
-> Renaissance, and early modern state formation through the choices you make.
+> Balance cash, users, morale, insight, stakeholders, product areas, and upgrades in a compact SaaS
+> strategy game designed for quick sessions. Each turn is one week. Continue immediately for momentum,
+> or step away and return with stronger focus. Learn real product and startup tradeoffs through the
+> choices you make.
